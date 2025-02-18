@@ -19,7 +19,10 @@ Next step, then:
 2. Play around with the Numba integration and see if it works.
 3. In particular, do a proof-of-concept with Polars.
 
+Docs: https://awkward-array.org/doc/main/user-guide/how-to-use-in-numba-features.html
+
 ## What I've learned so far
 
 * Pandas is a required dependency for the Awkard Arrow integration to work.
   Annoying but not the end of the world.
+* Not necessarily much in the way of APIs to access?
