@@ -5,8 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "awkward-numba>=0.13.0",
+    "awkward>=2.7.4",
     "numba>=0.61.0",
+    "pandas>=2.2.3",
     "polars>=1.22.0",
     "pyarrow>=19.0.0",
 ]

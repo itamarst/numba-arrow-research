@@ -18,3 +18,8 @@ Next step, then:
 1. Validate that awkward array is indeed zero-copy from Arrow.
 2. Play around with the Numba integration and see if it works.
 3. In particular, do a proof-of-concept with Polars.
+
+## What I've learned so far
+
+* Pandas is a required dependency for the Awkard Arrow integration to work.
+  Annoying but not the end of the world.
