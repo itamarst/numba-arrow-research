@@ -5,7 +5,7 @@ import awkward.numba
 import awkward as ak
 from numba import jit
 
-large_series = pl.Series(range(1000))
+large_series = pl.Series(range(10_000))
 
 series = pl.Series([1, 2, None, 4])
 ak_arr = ak.from_arrow(series.to_arrow())
@@ -22,18 +22,18 @@ def my_sum(array):
 print("Numba sum:", my_sum(ak_arr))
 NEWEST = pl.CompatLevel.newest()
 large_ak_arr = ak.from_arrow(large_series.to_arrow())
+print("Numba sum:", my_sum(large_ak_arr))
 
 large_numpy_arr = large_series.to_numpy()
 my_sum(large_numpy_arr)
 
 print("TIMING")
-print("Polars:", timeit.timeit("large_series.sum()", globals=locals()))
 print("Numba Numpy:", timeit.timeit("my_sum(large_numpy_arr)", globals=locals()))
 print("Numba Numpy w/conversion cost:", timeit.timeit("my_sum(large_series.to_numpy())", globals=locals()))
 print("Numba Arrow: ", timeit.timeit("my_sum(large_ak_arr)", globals=locals()))
-print("To arrow:", timeit.timeit("large_series.to_arrow()", globals=locals()))
+print("To arrow:", timeit.timeit("large_series.to_arrow(compat_level=NEWEST)", globals=locals()))
 print("To awkward array:", timeit.timeit("ak.from_arrow(large_series.to_arrow())", globals=locals()))
-print("Numba w/conversion cost: ", timeit.timeit("my_sum(ak.from_arrow(large_series.to_arrow()))", globals=locals()))
+print("Numba Arrow w/conversion cost: ", timeit.timeit("my_sum(ak.from_arrow(large_series.to_arrow()))", globals=locals()))
 
 
 @jit
