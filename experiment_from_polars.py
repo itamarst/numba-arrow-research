@@ -48,8 +48,11 @@ print("As arrow:", arrow_result, type(arrow_result))
 print("New array as series:", pl.from_arrow(arrow_result))
 
 
+def to_ak(series: pl.Series):
+    return ak.from_arrow(series.to_arrow())
+
 def add_one_ak_e2e(series: pl.Series) -> pl.Series:
-    ak_arr = ak.from_arrow(series.to_arrow())
+    ak_arr = to_ak(series)
     builder = ak.ArrayBuilder()
     add_one(builder, ak_arr)
     new_ak_array = builder.snapshot()
@@ -62,3 +65,5 @@ def add_one_pl(series: pl.Series) -> pl.Series:
 
 
 assert add_one_ak_e2e(large_series).to_list() == add_one_pl(large_series).to_list()
+
+
